@@ -27,7 +27,7 @@ Le modèle est téléchargé automatiquement depuis Hugging Face au premier lanc
 
 ```bash
 # 1. Cloner le dépôt
-git clone https://github.com/VOTRE_COMPTE/mcp-gliner-decide.git
+git clone https://github.com/tijo95/mcp-gliner-decide.git
 cd mcp-gliner-decide
 
 # 2. Créer un environnement virtuel (venv) avec Python 3.13
