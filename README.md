@@ -2,17 +2,17 @@
 
 ## Description
 
-Serveur MCP (Model Context Protocol) basé sur **GLiNER 2.5** (`fastino/GLiNER2.5-Decide`) pour :
+Serveur MCP (Model Context Protocol) basé sur **GLiNER 2.5** (`fastino/gliner2.5-multi-v1`, encoder mDeBERTa v3 multilingue) pour :
 
 - **L'extraction d'entités nommées** (personnes, lieux, produits, dates, etc.) à partir de n'importe quel texte.
-- **La classification Zero-Shot ultra-rapide** : décision structurée d'un texte selon une liste de labels fournies par l'utilisateur, sans réentraînement (inférence CPU, latence très faible).
+- **La classification Zero-Shot ultra-rapide** : décision structurée d'un texte selon une liste de labels fournies par l'utilisateur, sans réentraînement, via la tête de classification dédiée de GLiNER 2.5 (inférence CPU, latence très faible).
 
 Le serveur expose deux outils MCP :
 
 | Outil | Description |
 |-------|-------------|
-| `classify_text` | Classe un texte selon une liste de labels fournis (avec traduction automatique FR → EN pour maximiser la précision Zero-Shot). |
-| `extract_entities` | Extrait des entités nommées à partir d'un texte selon les types d'entités demandés. |
+| `classify_text` | Classe un texte selon une liste de labels fournis (acceptés en français, le modèle est multilingue) et renvoie la prédiction avec confidence et probabilités. |
+| `extract_entities` | Extrait des entités nommées à partir d'un texte selon les types d'entités demandés (acceptés en français ou en anglais), avec confiances par entité. |
 
 Le modèle est téléchargé automatiquement depuis Hugging Face au premier lancement (puis mis en cache).
 
@@ -40,7 +40,7 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-> 💡 Le modèle `fastino/GLiNER2.5-Decide` sera téléchargé au premier lancement du serveur. Assurez-vous d'une connexion Internet la première fois.
+> 💡 Le modèle `fastino/gliner2.5-multi-v1` sera téléchargé au premier lancement du serveur. Assurez-vous d'une connexion Internet la première fois.
 
 ## Utilisation
 
@@ -59,7 +59,7 @@ Ajouter le snippet suivant dans la configuration MCP d'Unsloth Studio (remplacez
 ```json
 {
   "mcpServers": {
-    "GLiNER2.5-Decide": {
+    "gliner-decide": {
       "command": "C:\Users\VOTRE_CHemin\mcp-gliner-decide\venv\Scripts\python.exe",
       "args": ["C:\Users\VOTRE_CHemin\mcp-gliner-decide\server.py"]
     }
